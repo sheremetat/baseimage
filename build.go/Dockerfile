@@ -21,7 +21,7 @@ RUN \
     ln -s /go/bin/gometalinter.v2 /go/bin/gometalinter && \
     gometalinter --install --force 
 
-RUN wget -O - -q https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v1.17.1 && \
+RUN wget -O - -q https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v1.19.1 && \
     golangci-lint --version
 
 ADD coverage.sh /script/coverage.sh
