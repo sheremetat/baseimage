@@ -26,20 +26,13 @@ RUN golangci-lint run --no-config --issues-exit-code=1 --exclude-use-default=fal
       --enable=typecheck --enable=golint --enable=interfacer --enable=unconvert \
       --enable=dupl --enable=goconst --enable=gocyclo --enable=gosec
 
-RUN go build -v -mod=vendor -o my-service ./
+RUN go build -v -mod=vendor -o /go/bin/svc
 
 
 FROM sheremetat/baseimage:app-latest
 
-WORKDIR /srv
+WORKDIR /app
 
-ADD start.sh /srv/start.sh
+COPY --from=build-service /go/bin/svc /app/svc
 
-RUN chmod +x /srv/start.sh
-
-COPY --from=build-service /my-service/my-service /srv/
-
-RUN chown -R app:app /srv
-
-CMD ["/srv/start.sh"]
-ENTRYPOINT ["/init.sh"]```
+CMD ["./svc"]```
