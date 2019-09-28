@@ -10,10 +10,9 @@ ENV \
 
 COPY files/scripts/nop.sh /usr/bin/nop.sh
 COPY files/scripts/app.sh /usr/bin/app.sh
-COPY files/init.sh /init.sh
 
 RUN \
-    chmod +x /usr/bin/nop.sh /usr/bin/app.sh /init.sh && \
+    chmod +x /usr/bin/nop.sh /usr/bin/app.sh && \
     apk add --no-cache --update su-exec tzdata curl openssl && \
     ln -s /sbin/su-exec /usr/local/bin/gosu && \
     mkdir -p /home/$MYUSER && \
@@ -26,5 +25,4 @@ RUN \
     wget -q https://github.com/Yelp/dumb-init/releases/download/v${DINIT_VERSION}/dumb-init_${DINIT_VERSION}_amd64 -O /sbin/dinit && \
     chmod +x /sbin/dinit && \
     rm -rf /var/cache/apk/*
-
-ENTRYPOINT ["/init.sh"]
+    
