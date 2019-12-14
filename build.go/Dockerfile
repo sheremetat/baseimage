@@ -16,10 +16,8 @@ RUN \
     go get -u github.com/kardianos/govendor && \
     go get -u github.com/mattn/goveralls && \
     go get -u github.com/jteeuwen/go-bindata/... && \
-    go get -u github.com/stretchr/testify && \
-    ln -s /go/bin/gometalinter.v2 /go/bin/gometalinter && \
-    gometalinter --install --force 
-
+    go get -u github.com/stretchr/testify
+    
 RUN wget -O - -q https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v1.21.0 && \
     golangci-lint --version
 
