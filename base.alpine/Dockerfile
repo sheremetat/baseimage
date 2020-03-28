@@ -1,4 +1,6 @@
-FROM alpine:3.10
+FROM alpine:3.11
+
+LABEL maintainer="Taras Sheremeta <sheremetat@gmail.com>"
 
 ENV \
     TERM=xterm-color           \

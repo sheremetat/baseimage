@@ -1,29 +1,25 @@
-FROM golang:1.13.4-alpine3.10
+FROM golang:1.14.1-alpine3.11
+
+LABEL maintainer="Taras Sheremeta <sheremetat@gmail.com>"
+
+ENV \
+    CGO_ENABLED=0 \
+    GOOS=linux \
+    GOARCH=amd64 \
+    GOLANGCI=1.24.0
 
 RUN \
     apk add --no-cache --update tzdata git bash curl && \
     cp /usr/share/zoneinfo/Europe/Kiev /etc/localtime && \
     rm -rf /var/cache/apk/*
 
-RUN go version
-
-ENV CGO_ENABLED=0
-ENV GOOS=linux
-ENV GOARCH=amd64
-
-RUN \
-    go get -u github.com/golang/dep/cmd/dep && \
-    go get -u github.com/kardianos/govendor && \
-    go get -u github.com/mattn/goveralls && \
-    go get -u github.com/jteeuwen/go-bindata/... && \
-    go get -u github.com/stretchr/testify
+RUN go version && \
+    go get -u -v github.com/stretchr/testify
     
-RUN wget -O - -q https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v1.21.0 && \
+RUN wget -O - -q https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s v${GOLANGCI} && \
     golangci-lint --version
 
 ADD coverage.sh /script/coverage.sh
-ADD checkvendor.sh /script/checkvendor.sh
 
 RUN \
-    chmod +x /script/coverage.sh /script/checkvendor.sh && \
-    ln -s /script/checkvendor.sh $GOPATH/bin/checkvendor
+    chmod +x /script/coverage.sh

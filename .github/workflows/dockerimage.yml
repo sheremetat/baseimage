@@ -1,0 +1,20 @@
+name: Baseimage Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test Build.Go
+      run: docker build --rm -f build.go/Dockerfile -t build.go:$(date +%s) build.go
+    - name: Test Base.Alpine
+      run: docker build --rm -f base.alpine/Dockerfile -t base.app:$(date +%s) base.alpine
