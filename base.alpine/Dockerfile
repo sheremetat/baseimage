@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.15
 
 LABEL maintainer="Taras Sheremeta <sheremetat@gmail.com>"
 
