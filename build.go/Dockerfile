@@ -1,4 +1,4 @@
-FROM golang:1.18.0-alpine3.15
+FROM golang:1.19.0-alpine3.16
 
 LABEL maintainer="Taras Sheremeta <sheremetat@gmail.com>"
 
