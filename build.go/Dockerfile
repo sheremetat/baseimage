@@ -6,7 +6,7 @@ ENV \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
-    GOLANGCI=1.45.0
+    GOLANGCI=1.48.0
 
 RUN \
     apk add --no-cache --update tzdata git bash curl && \
