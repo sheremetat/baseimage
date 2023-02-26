@@ -1,4 +1,4 @@
-FROM golang:1.19.0-alpine3.16
+FROM golang:1.20.1-alpine3.16
 
 LABEL maintainer="Taras Sheremeta <sheremetat@gmail.com>"
 
@@ -6,7 +6,7 @@ ENV \
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64 \
-    GOLANGCI=1.48.0
+    GOLANGCI=1.51.2
 
 RUN \
     apk add --no-cache --update tzdata git bash curl && \
